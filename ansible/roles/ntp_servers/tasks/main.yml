@@ -1,0 +1,14 @@
+---
+# tasks file for roles/common
+
+- name: updating ntp
+  yum:
+    name: "ntp"
+    state: "latest"
+    update_cache: "yes"
+
+- name: copy ntp.conf file to /etc/ntp.conf
+  template:
+    src: "ntp.conf.j2"
+    dest: "/etc/ntp.conf"
+  notify: "restart ntp service"

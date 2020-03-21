@@ -1,0 +1,13 @@
+---
+# defaults file for roles/common
+
+common_packages:
+  - "ntp"
+  - "vim-enhanced"
+  - "git"
+  - "unzip"
+  - "epel-release"
+  - "wget"
+
+users:
+  - { name: "jlp", group: "jlp", state: "present", key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}" }

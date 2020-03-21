@@ -1,0 +1,8 @@
+---
+# defaults file for roles/ntp
+
+ntp_servers:
+  - "0.mx.pool.ntp.org"
+  - "2.north-america.pool.ntp.org"
+  - "1.north-america.pool.ntp.org"
+

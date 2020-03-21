@@ -1,0 +1,35 @@
+---
+# tasks file for roles/common
+
+- name: updating all installed packages
+  yum:
+    name: "*"
+    state: "latest"
+    update_cache: "yes"
+
+- name: installing common packages
+  yum:
+    name: "{{ common_packages }}"
+    state: "installed"
+
+- name: add group for users
+  group:
+    name: "{{ item.group }}"
+    state: "{{ item.state }}"
+  with_items: "{{ users }}"
+
+- name: add users to groups
+  user:
+    name: "{{ item.name }}"
+    group: "{{ item.group }}"
+    comment: "{{ item.name }}"
+    state: "{{ item.state }}"
+  with_items: "{{ users }}"
+
+- name: add keys to users
+  authorized_key:
+    user: "{{ item.name }}"
+    key: "{{ item.key }}"
+  with_items: "{{ users }}"
+
+
